@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Template</title>
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container mx-auto fonts-custom" style="width: 700px">
+
+    <span class="block text-center px-4 py-2">
+      <h1 class="text-4xl font-extrabold">INVOICE</h1>
+    </span>
+
+    <div class="flex">
+      <div class="flex-1 text-center text-xs px-4 py-2 m-2">
+        <span class="block text-center mt-2">
+          <p><%= owner.name %></p>
+        </span>
+        <span class="block text-center">
+          <p><%= owner.email %></p>
+        </span>
+      </div>
+
+      <div class="flex-1 text-center text-xs px-4 py-2 m-2">
+        <p class="font-black uppercase text-xs">Tax Number</p>
+        <p><%= owner.taxNumber %>
+      </div>
+      <div class="flex-1 text-center text-xs px-4 py-2 m-2">
+        <p class="font-black uppercase text-xs">Reference</p>
+        <p class="text-xs"><%= invoice.reference %></p>
+      </div>
+    </div>
+
+    <div class="flex">
+      <div class="flex-1 text-center text-xs px-4 py-2 m-2">
+        <p class="font-black uppercase">Amount</p>
+        <p class="text-xs">$<%= invoice.subTotal %></p>
+      </div>
+      <div class="flex-1 text-center text-xs px-4 py-2 m-2">
+        <p class="font-black uppercase">Date</p>
+        <p><%= invoice.date %></p>
+      </div>
+      <div class="flex-1 text-center text-xs px-4 py-2 m-2">
+        <p><%= customer.name %></p>
+        <p><%= customer.email %></p>
+      </div>
+    </div>
+
+
+    <table class="table-auto border-0 mt-8" style="width: 700px">
+      <thead>
+        <tr>
+          <th class="px-4 py-2 text-xs text-left">DESCRIPTION</th>
+          <th class="px-4 py-2 text-xs text-right">QUANTITY</th>
+          <th class="px-4 py-2 text-xs text-right">RATE</th>
+          <th class="px-4 py-2 text-xs text-right">TOTAL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% invoice.items.forEach(function(item) { %>
+        <tr>
+          <td class="border px-4 py-2 text-xs text-left border-none"><%= item.description %></td>
+          <td class="border px-4 py-2 text-xs text-right border-none"><%= item.quantity %></td>
+          <td class="border px-4 py-2 text-xs text-right border-none">$<%= item.rate %></td>
+          <td class="border px-4 py-2 text-xs text-right border-none">$<%= item.quantity * item.rate || "" %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <textarea class="resize-y border-none rounded focus:outline-none focus:shadow-outline mt-8 text-center text-sm"
+      style="width: 700px"><%= invoice.notes %></textarea>
+  </div>
+</body>
+
+</html>

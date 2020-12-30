@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Template</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+    <style>
+        html {
+            -webkit-print-color-adjust: exact;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#818CF8" fill-opacity="1"
+                d="M0,256L34.3,229.3C68.6,203,137,149,206,144C274.3,139,343,181,411,208C480,235,549,245,617,234.7C685.7,224,754,192,823,176C891.4,160,960,160,1029,186.7C1097.1,213,1166,267,1234,282.7C1302.9,299,1371,277,1406,266.7L1440,256L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z">
+            </path>
+        </svg>
+
+        <div class="p-8 -mt-16">
+            <div>
+                <h1 class="p-4 text-3xl font-medium text-center"><%= invoice.title %></h1>
+                <h2 class="text-center">
+                    <%= owner.name %>
+                </h2>
+                <h2 class="text-center">
+                    <%= owner.phoneNumber %>
+                </h2>
+                <h2 class="text-center">
+                    <%= owner.email %>
+                </h2>
+            </div>
+
+            <div class="flex justify-between mt-12">
+                <div class="p-4 md:p-0">
+                    <h2 class="font-bold">Tax Number</h2>
+                    <div>
+                        <%= owner.taxNumber %>
+                    </div>
+                </div>
+                <div class="p-4 md:p-0">
+                    <h2 class="font-bold">Date</h2>
+                    <div>
+                        <%= invoice.date %>
+                    </div>
+                </div>
+                <div class="p-4 md:p-0">
+                    <h2 class="font-bold">Billed to</h2>
+                    <div>
+                        <%= customer.name %>
+                    </div>
+                    <div>
+                        <%= customer.email %>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12">
+                <h3 class="text-lg font-black">Description</h3>
+                <div class="p-4 mt-2 rounded-lg bg-indigo-50">
+                    <% invoice.items.forEach(function(item) { %>
+                        <div class="flex p-2 border-b border-indigo-200">
+                            <div class="flex-1">
+                                <%= item.description %>
+                            </div>
+                            <div class="flex">
+                                $<%= item.rate %>
+                            </div>
+                        </div>
+                        <% }) %>
+                        <div class="flex p-2">
+                            <div class="flex-1 font-black tracking-wider">Amount Due</div>
+                            <div class="flex">$<%= invoice.subTotal %></div>
+                        </div>
+                </div>
+            </div>
+
+            <div class="mt-12">
+                <h3 class="text-lg font-black">Pay by Bank Transfer</h3>
+                <div class="p-4 mt-2 rounded-lg bg-indigo-50">
+                    <div class="flex">
+                        <div class="flex-1">Account Number</div>
+                        <div class="flex">
+                            <%= owner.accountNumber %>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="flex-1">Reference</div>
+                        <div class="flex">
+                            <%= invoice.reference %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
